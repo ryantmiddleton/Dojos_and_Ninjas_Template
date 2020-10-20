@@ -1,0 +1,101 @@
+(djangoPy3Env)
+Ryan Middleton@11O11HAL900011O11 MINGW64 ~/CodingDojo/Python/python_stack/dojos_ninjas_proj
+$ python manage.py shell
+Python 3.8.5 (tags/v3.8.5:580fbb0, Jul 20 2020, 15:43:08) [MSC v.1926 32 bit (Intel)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from dojo_ninjas_app.models import dojos, ninjas
+>>> newDojo = dojos.objects.create(name = "Cobra Kai", city = "Recida", state = "CA")
+>>> newDojo = dojos.objects.create(name = "Kata", city = "Seattle", state = "WA")     
+>>> newDojo = dojos.objects.create(name = "Coding", city = "San Francisco", state = "CA")
+>>> print(dojos.objects.all())
+<QuerySet [<dojos: dojos object (1)>, <dojos: dojos object (2)>, <dojos: dojos object (3)>]>
+>>> dojos.objects.all().delete()
+(3, {'dojo_ninjas_app.ninjas': 0, 'dojo_ninjas_app.dojos': 3})
+>>> print (dojos.objects.all())
+<QuerySet []>
+>>> newDojo = dojos.objects.create(name = "Cobra Kai", city = "Recida", state = "CA")
+>>> newDojo = dojos.objects.create(name = "Kata", city = "Seattle", state = "WA")
+>>> newDojo = dojos.objects.create(name = "Coding", city = "San Francisco", state = "CA")
+>>> print(dojos.objects.all())
+<QuerySet [<dojos: dojos object (4)>, <dojos: dojos object (5)>, <dojos: dojos object (6)>]
+>>> ninjas.objects.create(dojo_id = dojos.objects.get(id=4), first_name="Ryan", last_name="Middleton") 
+<ninjas: ninjas object (1)>
+>>> ninjas.objects.create(dojo_id = dojos.objects.get(id=4), first_name="Ferris", last_name="Middleton")  
+<ninjas: ninjas object (2)>
+>>> ninjas.objects.create(dojo_id = dojos.objects.get(id=4), first_name="Stefan", last_name="Sandberg")   
+<ninjas: ninjas object (3)>
+>>> ninjas.objects.create(dojo_id = dojos.objects.get(id=5), first_name="Anna Lee", last_name="Dumas")      
+<ninjas: ninjas object (4)>
+>>> ninjas.objects.create(dojo_id = dojos.objects.get(id=5), first_name="Jeremiah", last_name="Skender") 
+<ninjas: ninjas object (5)>
+>>> ninjas.objects.create(dojo_id = dojos.objects.get(id=5), first_name="Martin", last_name="Cameron") 
+<ninjas: ninjas object (6)>
+>>> ninjas.objects.create(dojo_id = dojos.objects.get(id=6), first_name="Jeff", last_name="Adamo")     
+<ninjas: ninjas object (7)>
+>>> ninjas.objects.create(dojo_id = dojos.objects.get(id=6), first_name="Whitney", last_name="Lumbach") 
+<ninjas: ninjas object (8)>
+>>> ninjas.objects.create(dojo_id = dojos.objects.get(id=6), first_name="Kurt", last_name="Hinz")  
+<ninjas: ninjas object (9)>
+>>> CobraKaiNinjas = ninjas.objects.filter(dojo_id=4)         
+>>> print(CobraKaiNinjas)
+<QuerySet [<ninjas: ninjas object (1)>, <ninjas: ninjas object (2)>, <ninjas: ninjas object (3)>]>
+>>> for ninja in CobraKaiNinjas:
+...     print(ninja.first_name, ninja.last_name)
+... 
+Ryan Middleton
+Ferris Middleton
+Stefan Sandberg
+>>> KataNinjas = ninjas.objects.filter(dojo_id=5)
+>>> for ninja in KataNinjas:
+...     print(ninja.first_name, ninja.last_name)
+... 
+Anna Lee Dumas
+Jeremiah Skender
+Martin Cameron
+>>> CodingNinjas = ninjas.objects.filter(dojo_id=6)
+>>> for ninja in CodingNinjas:
+...     print(ninja.first_name, ninja.last_name)
+... 
+Jeff Adamo
+Whitney Lumbach
+Kurt Hinz
+>>> last_ninja = ninjas.objects.last() 
+>>> print(last_ninja.dojo_id.name)
+Coding
+>>> ^Z
+
+now exiting InteractiveConsole...
+(djangoPy3Env)
+Ryan Middleton@11O11HAL900011O11 MINGW64 ~/CodingDojo/Python/python_stack/dojos_ninjas_proj
+$ python manage.py makemigrations
+You are trying to add a non-nullable field 'desc' to dojos without a default; we can't do that (the database needs something to populate existing rows).
+Please select a fix:
+ 1) Provide a one-off default now (will be set on all existing rows with a null value for this column)
+ 2) Quit, and let me add a default in models.py
+Select an option: 1
+Please enter the default value now, as valid Python
+The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now
+Type 'exit' to exit this prompt
+>>> "old dojo"
+Migrations for 'dojo_ninjas_app':
+  dojo_ninjas_app\migrations\0002_dojos_desc.py
+    - Add field desc to dojos
+(djangoPy3Env)
+Ryan Middleton@11O11HAL900011O11 MINGW64 ~/CodingDojo/Python/python_stack/dojos_ninjas_proj
+$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, dojo_ninjas_app, sessions
+Running migrations:
+  Applying dojo_ninjas_app.0002_dojos_desc... OK
+(djangoPy3Env)
+Ryan Middleton@11O11HAL900011O11 MINGW64 ~/CodingDojo/Python/python_stack/dojos_ninjas_proj
+$ python manage.py shell
+Python 3.8.5 (tags/v3.8.5:580fbb0, Jul 20 2020, 15:43:08) [MSC v.1926 32 bit (Intel)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from dojo_ninjas_app.models import dojos, ninjas
+>>> dojos.objects.create(name="Sun and Earth", city="Austin", state="TX", desc="specializes in meditation")
+<dojos: dojos object (7)>
+>>> print(dojos.objects.get(id=7).name)     
+Sun and Earth

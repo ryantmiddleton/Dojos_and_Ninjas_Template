@@ -1,0 +1,54 @@
+*{
+    margin:0px;
+    padding:0px;
+    /* border:1px dotted red; */
+}
+#input_data_cont{
+    display:inline-block;
+    width:100%;
+    border-bottom: 1px solid black;
+    padding-bottom:50px;
+}
+
+#display_data_cont{
+    margin-left:550px;
+}
+#display_data_cont ul{
+    padding-left:20px;
+}
+#display_data_cont h2{
+    margin-top:10px;
+}
+#display_data_cont h2, form{
+    display:inline-block;
+}
+
+#input_data_cont div{
+    display:inline-block;
+}
+
+#input_data_cont #add_dojo_cont{
+    margin-left:350px;
+}
+
+div div .add_btn{
+    display:block;
+    margin-top:5px;
+    margin-left:120px;
+}
+
+#input_data_cont #add_ninja_cont{
+    margin-left:100px;
+}
+
+.label_columns *{
+    display:block;
+    line-height:21px;
+}
+
+.input_columns *{
+    display:block;
+}
+
+#dojo_sel{
+    width:160px;
